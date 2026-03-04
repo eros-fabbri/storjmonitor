@@ -274,8 +274,8 @@ async def post_init(app: Application):
     monitor = DockerLogMonitor(config['storj']['container_name'], loop, app)
     monitor.start()
     
-    # Keep reference to avoid GC (though thread handles itself mostly)
-    app.job_queue.run_once(lambda x: None, 1, data=monitor) # dummy job
+    # Keep reference to avoid GC
+    app.monitor_thread = monitor
     logger.info("Bot initialized and monitor started.")
 
 def main():
