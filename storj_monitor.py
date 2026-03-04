@@ -275,7 +275,7 @@ async def post_init(app: Application):
     monitor.start()
     
     # Keep reference to avoid GC
-    app.monitor_thread = monitor
+    app.bot_data['monitor_thread'] = monitor
     logger.info("Bot initialized and monitor started.")
 
 def main():
