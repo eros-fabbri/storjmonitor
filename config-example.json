@@ -1,0 +1,14 @@
+{
+    "telegram": {
+        "bot_token": "YOUR_BOT_TOKEN_HERE",
+        "password": "YOUR_SECURE_PASSWORD",
+        "allowed_users_file": "allowed_users.json"
+    },
+    "storj": {
+        "api_url": "http://localhost:14002",
+        "container_name": "storagenode"
+    },
+    "monitoring": {
+        "check_interval": 60
+    }
+}

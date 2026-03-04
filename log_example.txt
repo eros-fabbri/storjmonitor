@@ -1,0 +1,31 @@
+2026-03-04T07:41:43Z	INFO	piecestore	uploaded	{"Process": "storagenode", "Piece ID": "E3MVIEQCMXOBPWQHET7JBJAYA5JAX3G675JCHVSNI3B34G6NEHGQ", "Satellite ID": "12EayRS2V1kEsWESU9QMRseFhdxYxKicsiFmxrsLZHeLUtdps3S", "Action": "PUT", "Remote Address": "172.17.0.1:36078", "Size": 3072}
+
+2026-03-04T07:41:43Z	INFO	piecestore	uploaded	{"Process": "storagenode", "Piece ID": "HLBR5MBRY4Q7VDILZS25EYMXKXROE3QWOWXJNMKYES5QWORRLXWA", "Satellite ID": "12L9ZFwhzVpuEKMUNUqkaTLGzwY9G24tbiigLiXpmZWKwmcNDDs", "Action": "PUT", "Remote Address": "172.17.0.1:49944", "Size": 34816}
+
+2026-03-04T07:41:45Z	INFO	piecestore	uploaded	{"Process": "storagenode", "Piece ID": "GXTMNBAM3WTCHU7TCXAMBHYDCCYOD4MY3M3PEGHKXZPFAUS4Z7OA", "Satellite ID": "12L9ZFwhzVpuEKMUNUqkaTLGzwY9G24tbiigLiXpmZWKwmcNDDs", "Action": "PUT_REPAIR", "Remote Address": "172.17.0.1:42266", "Size": 1280}
+
+2026-03-04T07:41:45Z	INFO	collector	expired pieces collection started	{"Process": "storagenode"}
+
+2026-03-04T07:41:45Z	INFO	piecemigrate:chore	all enqueued for migration; will sleep before next pooling	{"Process": "storagenode", "active": {"12L9ZFwhzVpuEKMUNUqkaTLGzwY9G24tbiigLiXpmZWKwmcNDDs": false, "121RTSDpyNZVcEU84Ticf2L1ntiuUimbWgfATz21tuvgk3vzoA6": false, "1wFTAgs9DP5RSnCqKV1eLf6N9wtk4EAtmN5DpSxcs8EjT69tGE": false, "12EayRS2V1kEsWESU9QMRseFhdxYxKicsiFmxrsLZHeLUtdps3S": false}, "interval": "10m0s"}
+
+2026-03-04T07:41:45Z	INFO	bandwidth	Persisting bandwidth usage cache to db	{"Process": "storagenode"}
+
+2026-03-04T07:41:45Z	INFO	collector	expired pieces collection completed	{"Process": "storagenode", "count": 3}
+
+2026-03-04T07:41:47Z	INFO	orders	finished	{"Process": "storagenode", "satelliteID": "12L9ZFwhzVpuEKMUNUqkaTLGzwY9G24tbiigLiXpmZWKwmcNDDs", "count": 334}
+
+2026-03-04T07:41:48Z	INFO	orders	finished	{"Process": "storagenode", "satelliteID": "12EayRS2V1kEsWESU9QMRseFhdxYxKicsiFmxrsLZHeLUtdps3S", "count": 1146}
+
+2026-03-04T07:41:49Z	INFO	orders	finished	{"Process": "storagenode", "satelliteID": "121RTSDpyNZVcEU84Ticf2L1ntiuUimbWgfATz21tuvgk3vzoA6", "count": 52}
+
+2026-03-04T07:41:55Z	INFO	piecestore	downloaded	{"Process": "storagenode", "Piece ID": "UUOZCR23GLISZUGMDBMC7TT7ZAVVBDXKGNB6IYAAXPR6WERRTBLQ", "Satellite ID": "12L9ZFwhzVpuEKMUNUqkaTLGzwY9G24tbiigLiXpmZWKwmcNDDs", "Action": "GET", "Offset": 0, "Size": 362496, "Remote Address": "172.17.0.1:44606"}
+
+2026-03-04T07:41:56Z	ERROR	contact:service	ping satellite failed 	{"Process": "storagenode", "Satellite ID": "12L9ZFwhzVpuEKMUNUqkaTLGzwY9G24tbiigLiXpmZWKwmcNDDs", "attempts": 1, "error": "ping satellite: check-in network: failed to resolve IP from address: efstorj.duckdns.org:28967, err: lookup efstorj.duckdns.org on 10.60.0.10:53: read udp 10.54.16.2:44958->10.60.0.10:53: i/o timeout", "errorVerbose": "ping satellite: check-in network: failed to resolve IP from address: efstorj.duckdns.org:28967, err: lookup efstorj.duckdns.org on 10.60.0.10:53: read udp 10.54.16.2:44958->10.60.0.10:53: i/o timeout\n\tstorj.io/storj/storagenode/contact.(*Service).pingSatelliteOnce:227\n\tstorj.io/storj/storagenode/contact.(*Service).pingSatellite:169\n\tstorj.io/storj/storagenode/contact.(*Chore).updateCycles.func1:89\n\tstorj.io/common/sync2.(*Cycle).Run:163\n\tstorj.io/common/sync2.(*Cycle).Start.func1:77\n\tgolang.org/x/sync/errgroup.(*Group).Go.func1:93"}
+
+2026-03-04T07:42:01Z	INFO	piecestore	uploaded	{"Process": "storagenode", "Piece ID": "PTEURPOUR35NMHMDNXZKIOJ7WSIY6NCYABE5WD5REOIVOHY5KRYA", "Satellite ID": "12L9ZFwhzVpuEKMUNUqkaTLGzwY9G24tbiigLiXpmZWKwmcNDDs", "Action": "PUT", "Remote Address": "172.17.0.1:59306", "Size": 768512}
+
+2026-03-04T07:42:02Z	INFO	piecestore	uploaded	{"Process": "storagenode", "Piece ID": "GTKKDDK4CAPQR4GXKQWI4NT7DSQXPZP63GOWZIEH7UZIIMAH2BYQ", "Satellite ID": "12EayRS2V1kEsWESU9QMRseFhdxYxKicsiFmxrsLZHeLUtdps3S", "Action": "PUT", "Remote Address": "172.17.0.1:59306", "Size": 5376}
+
+2026-03-04T07:42:04Z	INFO	piecestore	uploaded	{"Process": "storagenode", "Piece ID": "JODIDE72GJMXNKYQPZY6HCF6WL7SAUN35XRXU2A3SNFRLGQZXXZA", "Satellite ID": "12L9ZFwhzVpuEKMUNUqkaTLGzwY9G24tbiigLiXpmZWKwmcNDDs", "Action": "PUT_REPAIR", "Remote Address": "172.17.0.1:59310", "Size": 612352}
+
+2026-03-04T07:42:05Z	INFO	piecestore	uploaded	{"Process": "storagenode", "Piece ID": "Y6F4KMX3PYY5WN3L7IUQ7Q2HE7XMRG5C5DWROPMXHMCTCL4NKCKQ", "Satellite ID": "12L9ZFwhzVpuEKMUNUqkaTLGzwY9G24tbiigLiXpmZWKwmcNDDs", "Action": "PUT", "Remote Address": "172.17.0.1:57674", "Size": 2304}
