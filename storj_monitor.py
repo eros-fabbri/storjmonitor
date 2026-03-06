@@ -89,7 +89,7 @@ class StorjAPI:
             response = requests.get(f"{self.base_url}/api/sno/satellites", timeout=5)
             response.raise_for_status()
             data = response.json()
-            return data.get('satellites', [])
+            return data.get('audits', [])
         except Exception as e:
             logger.error(f"Detailed Satellites API error: {e}")
             return None
@@ -115,7 +115,11 @@ class StorjAPI:
         stats_map = {}
         if detailed_stats:
             for sat in detailed_stats:
-                stats_map[sat['id']] = sat
+                # The audits list uses 'satelliteName' which contains url like 'saltlake.tardigrade.io:7777'
+                # We need to match this with the 'url' from dashboard satellites
+                name = sat.get('satelliteName', '')
+                if name:
+                    stats_map[name] = sat
 
         # Satellites from dashboard (contains vettedAt)
         satellites = dashboard.get('satellites', [])
@@ -162,9 +166,13 @@ class StorjAPI:
                     is_vetted = "✅" if vetted_at else "⏳ (Vetting)"
                     
                     # Detailed Stats
-                    details = stats_map.get(sat_id, {})
-                    audit_score = details.get('audit', {}).get('score', 0) * 100
-                    suspension_score = details.get('suspension', {}).get('score', 0) * 100
+                    # The 'audits' list from /api/sno/satellites uses the URL as the key (e.g. "saltlake.tardigrade.io:7777")
+                    # We match using the full URL from the dashboard list
+                    details = stats_map.get(url, {})
+                    
+                    # 1 = 100%, 0 = 0% as per user info
+                    audit_score = details.get('auditScore', 0) * 100
+                    suspension_score = details.get('suspensionScore', 0) * 100
                     online_score = details.get('onlineScore', 0) * 100
                     
                     report += (
