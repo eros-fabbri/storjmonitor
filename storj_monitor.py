@@ -84,28 +84,14 @@ class StorjAPI:
             logger.error(f"Dashboard API error: {e}")
             return None
 
-    def get_satellites(self):
+    def get_satellites_detailed(self):
         try:
-            # Using dashboard API to get satellites as requested by user
-            # The user pointed out that satellites info is inside /api/sno/
-            # but usually it's better to fetch from /api/sno/satellites if available.
-            # However, user provided output from /api/sno/ showing 'satellites' list inside it.
-            # Let's stick to /api/sno/ for the main data as shown in the example.
-            response = requests.get(f"{self.base_url}/api/sno/", timeout=5)
+            response = requests.get(f"{self.base_url}/api/sno/satellites", timeout=5)
             response.raise_for_status()
             data = response.json()
             return data.get('satellites', [])
         except Exception as e:
-            logger.error(f"Satellites API error: {e}")
-            return None
-
-    def get_estimated_payout(self):
-        try:
-            response = requests.get(f"{self.base_url}/api/sno/estimated-payout", timeout=5)
-            response.raise_for_status()
-            return response.json()
-        except Exception as e:
-            logger.error(f"Payout API error: {e}")
+            logger.error(f"Detailed Satellites API error: {e}")
             return None
 
     def get_status_report(self):
@@ -113,7 +99,16 @@ class StorjAPI:
         if not dashboard:
             return "❌ **Error**: Could not connect to Storj Node API."
 
-        # Satellites are now part of dashboard response based on user input
+        # Get detailed stats
+        detailed_stats = self.get_satellites_detailed()
+        
+        # Create a lookup dictionary for detailed stats by ID
+        stats_map = {}
+        if detailed_stats:
+            for sat in detailed_stats:
+                stats_map[sat['id']] = sat
+
+        # Satellites from dashboard (contains vettedAt)
         satellites = dashboard.get('satellites', [])
         payout = self.get_estimated_payout()
 
@@ -148,21 +143,27 @@ class StorjAPI:
             report += "\n🛰 **Satellites**:\n"
             for sat in satellites:
                 try:
+                    sat_id = sat.get('id', 'Unknown')
                     url = sat.get('url', 'Unknown')
                     # Safe parsing of name
-                    name = url.split('@')[1].split(':')[0] if '@' in url else sat.get('id', 'Unknown')[:8]
+                    name = url.split('@')[1].split(':')[0] if '@' in url else sat_id[:8]
                     
                     # Vetting logic based on vettedAt date
                     vetted_at = sat.get('vettedAt')
                     is_vetted = "✅" if vetted_at else "⏳ (Vetting)"
                     
-                    # Note: Audit/Online scores are NOT in the /api/sno/ satellites list shown by user.
-                    # They are typically in /api/sno/satellites. 
-                    # If the user wants audit scores, we might still need the other endpoint.
-                    # But based on the provided JSON, those fields are missing.
-                    # We will show what we have: ID/Name and Vetted status.
+                    # Detailed Stats
+                    details = stats_map.get(sat_id, {})
+                    audit_score = details.get('audit', {}).get('score', 0) * 100
+                    suspension_score = details.get('suspension', {}).get('score', 0) * 100
+                    online_score = details.get('onlineScore', 0) * 100
                     
-                    report += f"- **{name}**: {is_vetted}\n"
+                    report += (
+                        f"- **{name}** {is_vetted}\n"
+                        f"  ├ Audit: `{audit_score:.1f}%`\n"
+                        f"  ├ Susp: `{suspension_score:.1f}%`\n"
+                        f"  └ Online: `{online_score:.1f}%`\n"
+                    )
                 except Exception as e:
                     logger.error(f"Error parsing satellite data: {e}")
                     continue
