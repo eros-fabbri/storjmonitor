@@ -94,6 +94,15 @@ class StorjAPI:
             logger.error(f"Detailed Satellites API error: {e}")
             return None
 
+    def get_estimated_payout(self):
+        try:
+            response = requests.get(f"{self.base_url}/api/sno/estimated-payout", timeout=5)
+            response.raise_for_status()
+            return response.json()
+        except Exception as e:
+            logger.error(f"Payout API error: {e}")
+            return None
+
     def get_status_report(self):
         dashboard = self.get_dashboard()
         if not dashboard:
